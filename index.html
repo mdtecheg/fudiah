@@ -510,6 +510,7 @@ input,select,textarea{font-size:16px!important}input,select{min-height:44px}.btn
 .sh-in{background:#0d1117;border-radius:18px 18px 0 0;width:100%;max-height:82vh;overflow:auto;padding:14px}.sh-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:16px}.sh-h button{background:none;border:0;color:#fff;font-size:22px}
 .lb{display:flex;gap:8px;background:#161b27;border:1px solid #1e2d45;border-radius:10px;padding:10px;margin-bottom:8px;font-size:13px;line-height:1.7}.lb span{flex:1}.lb button{background:none;border:0;font-size:18px}
 #dirty{display:none;position:fixed;top:66px;left:8px;z-index:130;background:#f59e0b;color:#000;border:0;border-radius:99px;padding:8px 14px;font:800 12px Tajawal,sans-serif}#dirty.on{display:block}
+.P *{letter-spacing:0!important}textarea{overflow:hidden!important;resize:none!important}#dirty{display:none!important}
 </style>
 </head>
 <body>
@@ -560,7 +561,7 @@ input,select,textarea{font-size:16px!important}input,select{min-height:44px}.btn
   <div class="card">
     <div class="card-head">بيانات العميل</div>
     <div class="field"><label>السادة / اسم العميل أو الجهة</label>
-      <input id="q-client" type="text" list="dl-clients" placeholder="فندق ديوان اجياد"></div><div class="g3"><div class="field"><label>رقم العرض</label><input id="q-num" type="text"></div><div class="field"><label>التاريخ</label><input id="q-date" type="date"></div><div class="field"><label>صلاحية (يوم)</label><input id="q-valid" type="number" value="15" min="0"></div></div>
+      <input id="q-client" type="text" list="dl-clients" autocomplete="off" placeholder="فندق ديوان اجياد"></div><div class="g2"><div class="field"><label>التاريخ</label><input id="q-date" type="date"></div><div class="field"><label>صلاحية العرض (يوم)</label><input id="q-valid" type="number" value="15" min="0"></div></div><input id="q-num" type="hidden"><div class="g2"><div class="field"><label>الجوال</label><input id="q-phone" type="text" inputmode="tel"></div><div class="field"><label>العنوان</label><input id="q-addr" type="text"></div></div><div class="g2"><div class="field"><label>السجل التجاري (اختياري)</label><input id="q-cr" type="text"></div><div class="field"><label>الرقم الضريبي (اختياري)</label><input id="q-tax" type="text"></div></div><div class="field"><label>الممثل القانوني (اختياري)</label><input id="q-rep" type="text"></div>
   </div>
   <div class="card">
     <div class="card-head">نطاق العمل</div><div class="field"><label>نوع الخدمة (اختر واحدة أو أكثر)</label><input type="hidden" id="q-svc"><div class="chips wrapc" id="q-chips"></div></div>
@@ -588,7 +589,7 @@ input,select,textarea{font-size:16px!important}input,select{min-height:44px}.btn
   <div class="card">
     <div class="card-head">بيانات العقد</div>
     <div class="g2">
-      <div class="field"><label>رقم العقد</label><input id="c-num" type="text" value="2025-001"></div>
+      <input id="c-num" type="hidden">
       <div class="field"><label>تاريخ التحرير</label><input id="c-date" type="date"></div>
     </div>
   </div>
@@ -635,7 +636,7 @@ input,select,textarea{font-size:16px!important}input,select{min-height:44px}.btn
   <div class="card">
     <div class="card-head">بيانات العقد</div>
     <div class="g3">
-      <div class="field"><label>رقم العقد</label><input id="ag-num" type="text" value="AG-2025-001"></div>
+      <input id="ag-num" type="hidden">
       <div class="field"><label>تاريخ العقد</label><input id="ag-date" type="date"></div>
       <div class="field"><label>مكان الإبرام</label><input id="ag-city" type="text" value="مكة المكرمة"></div>
     </div>
@@ -775,7 +776,7 @@ input,select,textarea{font-size:16px!important}input,select{min-height:44px}.btn
 
 <!-- ═══════════════ PRINT AREA ═══════════════ -->
 <div id="archive" class="screen"><div class="wrap"><input id="ar-q" placeholder="🔍 بحث بالاسم أو الرقم" oninput="arRender()"><div class="chips" id="ar-chips"></div><div id="ar-list"></div></div></div>
-<div id="settings" class="screen"><div class="wrap"><div class="card"><div class="card-head">بيانات المؤسسة (تظهر في كل المستندات)</div><div id="st-f"></div></div>
+<div id="settings" class="screen"><div class="wrap"><div class="card"><div class="card-head">بيانات المؤسسة (تظهر في كل المستندات)</div><div id="st-f"></div><div style="font-size:11.5px;color:#7a8fa6;margin-top:10px">الإصدار: 24-09-2026 (ب) · اسم ملف PDF: نوع المستند - العميل - التاريخ (بدون رقم)</div></div>
 <div class="card"><div class="card-head">نسخة احتياطية</div><button class="btn btn-pdf" style="margin-bottom:10px" onclick="saveHTML()">⬇️ تنزيل index.html محدّثاً بالبيانات</button><div class="g2"><button class="btn btn-save" onclick="bkExp()">⬇️ تصدير</button><label class="btn btn-save" style="display:flex;align-items:center;justify-content:center">⬆️ استعادة<input type="file" accept=".json" hidden onchange="bkImp(this)"></label></div></div>
 <div class="btn-row" style="grid-template-columns:1fr"><button class="btn btn-pdf" onclick="stSave()">حفظ الإعدادات</button></div></div></div>
 <datalist id="dl-clients"></datalist><div id="toast" class="toast"></div><button id="dirty" onclick="saveHTML()">● تغييرات غير محفوظة — تنزيل النسخة</button><div id="sheet" class="sheet" onclick="if(event.target==this)libClose()"><div class="sh-in"><div class="sh-h"><b id="sh-t"></b><button onclick="libClose()">✕</button></div><div id="sh-b"></div></div></div>
@@ -793,9 +794,9 @@ const BAR  = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABFwAAAAtCAYAAACTSH++
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const E=id=>{const e=$(id);return e?esc(e.value):''};
-let _co={};try{_co=JSON.parse($('db').textContent).co||{}}catch(e){}
+let _co={};try{_co=JSON.parse(localStorage.getItem('fdy_db')||$('db').textContent).co||{}}catch(e){try{_co=JSON.parse($('db').textContent).co||{}}catch(e2){}}
 const CO=Object.assign({name:'مؤسسة فضية لويبان للتشغيل والصيانة',en:'FUDHYAH for Operation & Maintenance',rep:'صالح عايض الرشيدي',rid:'',cr:'7041365623',tax:'302040432900003',phone:'0549017880',city:'المدينة المنورة',addr:'المملكة العربية السعودية – المدينة المنورة',mail:'Info_mopc@outlook.com – fadhih_mopc@outlook.com'},_co);
-const SVC={"wash": {"n": "غسيل واجهات", "i": "غسيل واجهات", "s": ["غسيل الواجهات الزجاجية الداخلية والخارجية", "إزالة الغبار والأتربة والأوساخ العالقة", "تلميع الزجاج والإطارات المعدنية"], "m": ["استخدام أحدث الأدوات والتقنيات المتخصصة في غسيل الزجاج والواجهات", "مواد تنظيف آمنة على الواجهات", "فريق عمل متخصص ومدرَّب يعمل وفق اشتراطات السلامة"], "f": ["جودة عالية في مستوى النظافة", "الحفاظ على الواجهات دون أي تلف", "الالتزام بمواعيد التنفيذ", "إشراف فني طوال فترة العمل"], "c": ["يوفّر الطرف الثاني نقاط الربط ووسائل الوصول الآمن للواجهات ومصدر المياه والكهرباء دون مقابل، وأي تأخير بسبب ذلك يمدّد مدة التنفيذ تلقائياً.", "لا يتحمل الطرف الأول مسؤولية عن تشققات أو كسور أو عيوب سابقة في الزجاج أو الأختام أو الإطارات، ولا عن البقع الكلسية المزمنة أو الأضرار السابقة على التنفيذ.", "يحق للطرف الأول إيقاف العمل أو تأجيله عند الأحوال الجوية التي تعرّض العمال أو الواجهات للخطر دون أي مسؤولية أو تعويض، ويُستأنف العمل عند زوال السبب."]}, "maint": {"n": "صيانة واجهات", "i": "صيانة واجهات", "s": ["فحص الواجهات وتحديد أعمال الصيانة المطلوبة", "إصلاح واستبدال الأجزاء التالفة وفق المتفق عليه", "معالجة الفواصل والأختام"], "m": ["فحص ميداني قبل بدء الأعمال", "مواد وأجزاء مطابقة أو معادلة للأصل", "عمالة فنية متخصصة"], "f": ["سرعة التنفيذ وجودة التشطيب", "تقرير فني بالأعمال المنفذة", "الالتزام بالمواعيد", "إشراف فني"], "c": ["تقتصر أعمال الطرف الأول على البنود المذكورة في نطاق العمل، وأي أعمال إضافية تُنفَّذ بموافقة كتابية وبسعر مستقل.", "المواد وقطع الغيار غير المشمولة صراحةً في السعر تكون على حساب الطرف الثاني.", "لا يضمن الطرف الأول عيوباً ناتجة عن تصميم أو تركيب أو تصنيع سابق، ولا أضراراً تنشأ عن سوء الاستخدام أو تدخل الغير بعد التسليم."]}, "paint": {"n": "دهانات", "i": "أعمال الدهانات", "s": ["تجهيز الأسطح والمعجون والتأسيس", "دهان الأسطح بالمواد المتفق عليها", "تنظيف الموقع بعد الانتهاء"], "m": ["تجهيز الأسطح قبل الدهان", "مواد دهان معتمدة بالمواصفات المتفق عليها", "فنيون مدربون"], "f": ["تشطيب متجانس وجودة عالية", "مواد أصلية", "الالتزام بالجدول الزمني", "تنظيف الموقع بعد الانتهاء"], "c": ["يسلّم الطرف الثاني الأسطح جافة وخالية من الرطوبة والتسريبات، ولا يتحمل الطرف الأول عيوباً ناتجة عن رطوبة أو عفن أو تشققات مصدرها الإنشاء أو العزل.", "نقل الأثاث والمقتنيات وتغطيتها وإخلاء مواقع العمل مسؤولية الطرف الثاني، ولا يتحمل الطرف الأول تلفاً يصيب ما لم يُخلَ من الموقع.", "قد يختلف تدرّج اللون قليلاً بين الدفعات أو الأسطح المختلفة، وهو أمر طبيعي لا يُعدّ عيباً في التنفيذ."]}, "pest": {"n": "رش حشرات", "i": "مكافحة الحشرات", "s": ["فحص الموقع وتحديد أماكن الإصابة", "الرش بالمبيدات المعتمدة داخل الموقع وخارجه", "زيارة متابعة عند الحاجة"], "m": ["مبيدات معتمدة وآمنة الاستخدام", "فنيون مدربون", "الالتزام باشتراطات الصحة والسلامة"], "f": ["مبيدات معتمدة", "سرعة الاستجابة", "فنيون مؤهلون", "زيارات متابعة ضمن مدة الضمان"], "c": ["يلتزم الطرف الثاني بتعليمات الأمان قبل الرش وبعده، ومنها إخلاء المكان وإبعاد الأطفال والحيوانات والأغذية والتهوية، ولا يتحمل الطرف الأول مسؤولية ضرر ناتج عن مخالفتها.", "لا يضمن الطرف الأول القضاء الكامل على الإصابة إذا لم يلتزم الطرف الثاني بالنظافة وسدّ مصادر الإصابة، أو عند تجدد الإصابة من مصدر خارجي.", "تسري زيارات المتابعة ضمن مدة الضمان المحددة فقط، وتسقط عند عدم السماح بالدخول أو عدم الالتزام بالتعليمات."]}, "marble": {"n": "صيانة وتركيب رخام", "i": "أعمال الرخام", "s": ["توريد وتركيب الرخام أو معالجة القائم", "الجلي والتلميع", "معالجة الشروخ والفواصل"], "m": ["معاينة الموقع وأخذ المقاسات", "معدات قص وتلميع متخصصة", "فنيون ذوو خبرة"], "f": ["دقة في القص والتركيب", "تشطيب ولمعان عالٍ", "مواد لاصقة ومعالجة مناسبة", "تنظيف الموقع"], "c": ["يُعدّ اختلاف تدرّج العروق والألوان بين قطع الرخام أمراً طبيعياً لا يُعدّ عيباً، ولا يحق للطرف الثاني الاعتراض عليه.", "لا يتحمل الطرف الأول تشققات أو كسوراً ناتجة عن هبوط الأساس أو عيوب الإنشاء أو الأحمال الزائدة أو مصادر رطوبة سابقة.", "يجهّز الطرف الثاني الموقع ويخليه من المنقولات ويوفّر الكهرباء والمياه، ويتحمل الغبار الناتج عن الأعمال بحكم طبيعتها."]}, "floor": {"n": "صيانة وتركيب أرضيات", "i": "أعمال الأرضيات", "s": ["توريد وتركيب الأرضيات أو صيانتها", "تجهيز القاعدة والتسوية", "التشطيب والفواصل"], "m": ["معاينة القاعدة والمقاسات", "أدوات تركيب متخصصة", "فنيون ذوو خبرة"], "f": ["دقة في التركيب والتسوية", "تشطيب متقن", "مواد مطابقة للمواصفات", "تنظيف الموقع"], "c": ["تجهيز القاعدة وسلامتها وجفافها واستوائها مسؤولية الطرف الثاني، ولا ضمان على أي عيب ناتج عن رطوبة الأساس أو التسريب أو الهبوط.", "لا تُستخدم الأرضية أو تُحمَّل بالأثاث إلا بعد انقضاء مدة التجفيف التي يحددها الطرف الأول، ويسقط الضمان عند مخالفة ذلك.", "قد تختلف درجة اللون والنقش بين دفعات المواد، ولا يُعدّ ذلك عيباً في التنفيذ."]}};
+const SVC={"wash": {"n": "غسيل واجهات", "i": "غسيل واجهات", "s": ["غسيل الواجهات الزجاجية الداخلية والخارجية", "إزالة الغبار والأتربة والأوساخ العالقة", "تلميع الزجاج والإطارات المعدنية"], "m": ["استخدام أحدث الأدوات والتقنيات المتخصصة في غسيل الزجاج والواجهات", "مواد تنظيف آمنة على الواجهات", "فريق عمل متخصص ومدرَّب يعمل وفق اشتراطات السلامة"], "f": ["جودة عالية في مستوى النظافة", "الحفاظ على الواجهات دون أي تلف", "الالتزام بمواعيد التنفيذ", "إشراف فني طوال فترة العمل"], "c": ["يوفّر الطرف الثاني نقاط الربط ووسائل الوصول الآمن للواجهات ومصدر المياه والكهرباء دون مقابل، وأي تأخير بسبب ذلك يمدّد مدة التنفيذ.", "لا يتحمل الطرف الأول مسؤولية عن كسور أو تشققات أو عيوب سابقة في الزجاج أو الأختام أو الإطارات، ولا عن البقع الكلسية المزمنة أو الأضرار السابقة على التنفيذ.", "يحق للطرف الأول إيقاف العمل أو تأجيله عند الأحوال الجوية التي تعرّض العمال أو الواجهات للخطر دون مسؤولية أو تعويض، ويُستأنف عند زوال السبب."]}, "maint": {"n": "صيانة واجهات", "i": "صيانة واجهات", "s": ["فحص الواجهات وتحديد أعمال الصيانة المطلوبة", "إصلاح واستبدال الأجزاء التالفة وفق المتفق عليه", "معالجة الفواصل والأختام"], "m": ["فحص ميداني قبل بدء الأعمال", "مواد وأجزاء مطابقة أو معادلة للأصل", "عمالة فنية متخصصة"], "f": ["سرعة التنفيذ وجودة التشطيب", "تقرير فني بالأعمال المنفذة", "الالتزام بالمواعيد", "إشراف فني"], "c": ["يوفّر الطرف الثاني نقاط الربط ووسائل الوصول الآمن للواجهات ومصدر المياه والكهرباء دون مقابل، وأي تأخير بسبب ذلك يمدّد مدة التنفيذ.", "يحق للطرف الأول إيقاف العمل أو تأجيله عند الأحوال الجوية التي تعرّض العمال أو الواجهات للخطر دون مسؤولية أو تعويض، ويُستأنف عند زوال السبب.", "المواد وقطع الغيار غير المشمولة صراحةً في السعر تكون على حساب الطرف الثاني.", "لا يضمن الطرف الأول عيوباً ناتجة عن تصميم أو تركيب أو تصنيع سابق، ولا أضراراً تنشأ عن سوء الاستخدام أو تدخل الغير بعد التسليم."]}, "paint": {"n": "دهانات", "i": "أعمال الدهانات", "s": ["تجهيز الأسطح والمعجون والتأسيس", "دهان الأسطح بالمواد المتفق عليها", "تنظيف الموقع بعد الانتهاء"], "m": ["تجهيز الأسطح قبل الدهان", "مواد دهان معتمدة بالمواصفات المتفق عليها", "فنيون مدربون"], "f": ["تشطيب متجانس وجودة عالية", "مواد أصلية", "الالتزام بالجدول الزمني", "تنظيف الموقع بعد الانتهاء"], "c": ["يخلي الطرف الثاني موقع العمل من الأثاث والمنقولات قبل البدء، ولا يتحمل الطرف الأول تلفاً يصيب ما لم يُخلَ من الموقع.", "يسلّم الطرف الثاني الأسطح جافة وخالية من الرطوبة والتسريبات قبل بدء الدهان.", "لا يتحمل الطرف الأول عيوباً أو تشققات أو تلفاً ناتجاً عن الرطوبة أو التسريب أو هبوط الأساس أو عيوب الإنشاء والعزل أو الأحمال الزائدة.", "قد يختلف تدرّج اللون والنقش والعروق بين الدفعات أو القطع أو الأسطح المختلفة، وهو أمر طبيعي لا يُعدّ عيباً في التنفيذ."]}, "pest": {"n": "رش حشرات", "i": "مكافحة الحشرات", "s": ["فحص الموقع وتحديد أماكن الإصابة", "الرش بالمبيدات المعتمدة داخل الموقع وخارجه", "زيارة متابعة عند الحاجة"], "m": ["مبيدات معتمدة وآمنة الاستخدام", "فنيون مدربون", "الالتزام باشتراطات الصحة والسلامة"], "f": ["مبيدات معتمدة", "سرعة الاستجابة", "فنيون مؤهلون", "زيارات متابعة ضمن مدة الضمان"], "c": ["يلتزم الطرف الثاني بتعليمات الأمان قبل الرش وبعده، ومنها إخلاء المكان وإبعاد الأطفال والحيوانات والأغذية والتهوية، ولا يتحمل الطرف الأول مسؤولية ضرر ناتج عن مخالفتها.", "لا يضمن الطرف الأول القضاء الكامل على الإصابة إذا لم يلتزم الطرف الثاني بالنظافة وسدّ مصادر الإصابة، أو عند تجدد الإصابة من مصدر خارجي.", "تسري زيارات المتابعة ضمن مدة الضمان المحددة فقط، وتسقط عند عدم السماح بالدخول أو عدم الالتزام بالتعليمات."]}, "marble": {"n": "صيانة وتركيب رخام", "i": "أعمال الرخام", "s": ["توريد وتركيب الرخام أو معالجة القائم", "الجلي والتلميع", "معالجة الشروخ والفواصل"], "m": ["معاينة الموقع وأخذ المقاسات", "معدات قص وتلميع متخصصة", "فنيون ذوو خبرة"], "f": ["دقة في القص والتركيب", "تشطيب ولمعان عالٍ", "مواد لاصقة ومعالجة مناسبة", "تنظيف الموقع"], "c": ["يخلي الطرف الثاني موقع العمل من الأثاث والمنقولات قبل البدء، ولا يتحمل الطرف الأول تلفاً يصيب ما لم يُخلَ من الموقع.", "لا يتحمل الطرف الأول عيوباً أو تشققات أو تلفاً ناتجاً عن الرطوبة أو التسريب أو هبوط الأساس أو عيوب الإنشاء والعزل أو الأحمال الزائدة.", "قد يختلف تدرّج اللون والنقش والعروق بين الدفعات أو القطع أو الأسطح المختلفة، وهو أمر طبيعي لا يُعدّ عيباً في التنفيذ.", "يتحمل الطرف الثاني الغبار والضوضاء الناتجة عن الأعمال بحكم طبيعتها، ويوفّر الكهرباء والمياه اللازمة للتنفيذ."]}, "floor": {"n": "صيانة وتركيب أرضيات", "i": "أعمال الأرضيات", "s": ["توريد وتركيب الأرضيات أو صيانتها", "تجهيز القاعدة والتسوية", "التشطيب والفواصل"], "m": ["معاينة القاعدة والمقاسات", "أدوات تركيب متخصصة", "فنيون ذوو خبرة"], "f": ["دقة في التركيب والتسوية", "تشطيب متقن", "مواد مطابقة للمواصفات", "تنظيف الموقع"], "c": ["يخلي الطرف الثاني موقع العمل من الأثاث والمنقولات قبل البدء، ولا يتحمل الطرف الأول تلفاً يصيب ما لم يُخلَ من الموقع.", "يسلّم الطرف الثاني القاعدة سليمة ومستوية وجافة، وتُحتسب أي أعمال تسوية أو معالجة إضافية خارج نطاق العقد.", "لا يتحمل الطرف الأول عيوباً أو تشققات أو تلفاً ناتجاً عن الرطوبة أو التسريب أو هبوط الأساس أو عيوب الإنشاء والعزل أو الأحمال الزائدة.", "قد يختلف تدرّج اللون والنقش والعروق بين الدفعات أو القطع أو الأسطح المختلفة، وهو أمر طبيعي لا يُعدّ عيباً في التنفيذ.", "لا تُستخدم الأرضية ولا تُحمَّل بالأثاث إلا بعد انقضاء مدة التجفيف التي يحددها الطرف الأول، ويسقط الضمان عند مخالفة ذلك."]}};
 let qItems=[{d:'',q:1,p:0}];
 function qTotals(){const items=qItems.map(i=>({d:i.d,q:+i.q||0,p:+i.p||0}));const sub=items.reduce((a,i)=>a+i.q*i.p,0),dp=+$('q-disc').value||0,vp=+$('q-vp').value||0,disc=sub*dp/100,g=sub-disc,inc=$('q-tm').value=='1'&&vp>0;let net=g,vat=g*vp/100,total=g+vat;if(inc){net=g/(1+vp/100);vat=g-net;total=g}return{items,sub,dp,disc,net,vp,vat,total,inc,curr:$('q-curr').value}}
 function qCalc(){const T=qTotals();T.items.forEach((it,i)=>{const e=$('qs'+i);if(e)e.textContent=fmt(it.q*it.p)});$('q-tb').textContent=fmt(T.sub);$('q-td').textContent='- '+fmt(T.disc);$('q-tvl').textContent='ضريبة ('+T.vp+'%)';$('q-tv').textContent=fmt(T.vat);$('q-tt').textContent=fmt(T.total)}
@@ -887,7 +888,7 @@ function buildQuoteHTML(){
       <div class="ph-en"><div class="n1">${esc(CO.en)}</div><div class="n2">${esc(CO.name)}</div><div class="reg">Commercial Registration No: ${esc(CO.cr)}<br>Tax Number: ${esc(CO.tax)}</div></div>
     </div>
     <img class="pbar" src="${BAR}" alt="">
-    <div class="ptitle">عرض سعر</div><div style="text-align:center;font-size:10.5px;font-weight:700;color:#475569">${E('q-num')?'رقم: '+E('q-num')+' &nbsp;|&nbsp; ':''}التاريخ: ${fmtDate(E('q-date'))}</div>
+    <div class="ptitle">عرض سعر</div><div style="text-align:center;font-size:10.5px;font-weight:700;color:#475569">التاريخ: ${fmtDate(E('q-date'))}</div>
     <div class="pb">
       <div style="font-size:15px;font-weight:900;color:#1a2940">السادة / ${client}</div>
       <div style="font-size:12px;font-weight:700">السلام عليكم ورحمة الله وبركاته... ،،، تحية طيبة وبعد</div>
@@ -922,6 +923,7 @@ function cCalc(){
   document.getElementById('c-ttotal').textContent=fmt(total)+' ريال';
 }
 
+const pt=rows=>`<table style="width:100%;border-collapse:collapse;margin:6px 0">${rows.map(([l,v,b])=>`<tr><td style="border:1px solid #cbd5e1;padding:5px 8px;font-size:11px;font-weight:800;background:#eef2f7;width:40%">${l}</td><td style="border:1px solid #cbd5e1;padding:5px 8px;font-size:${b?13:11}px;font-weight:${b?900:700};text-align:right">${v}</td></tr>`).join('')}</table>`;
 function buildContractHTML(){
   const cnum=E('c-num')||'—';
   const cdate=E('c-date');
@@ -945,7 +947,7 @@ function buildContractHTML(){
     <img class="pbar" src="${BAR}" alt="">
     <div class="ptitle">عقد إيجار سلة كهربائية</div>
     <div class="pb">
-      <div class="pmeta"><span class="num">رقم العقد: ${cnum}</span><span>التاريخ: ${fmtDate(cdate)}</span></div>
+      <div class="pmeta"><span>التاريخ: ${fmtDate(cdate)}</span></div>
       <div class="pparties">
         <div class="pparty-box"><span class="pparty-title">الطرف الأول – المؤجر</span>
           <div class="pparty-row"><span class="lbl">الاسم:</span><span class="val">${esc(CO.name)}</span></div>
@@ -961,13 +963,7 @@ function buildContractHTML(){
         </div>
       </div>
       <div class="psubject">موضوع العقد: إيجار <span class="hi">${basket}</span> لمدة <span class="hi">${days} أيام</span> — من <span class="hi">${fmtDate(start)}</span> حتى <span class="hi">${addDays(start,days)}</span></div>
-      <div class="pprice">
-        <div class="pprice-r">
-          <div class="lbl">إجمالي قيمة الإيجار شامل الضريبة</div>
-          <div class="info">${fmt(daily)} ر.س × ${days} أيام + ضريبة ${vp}%</div>
-        </div>
-        <div class="pprice-l"><div class="total">${fmt(total)}</div><div class="curr">ريال سعودي</div></div>
-      </div>
+      ${pt([['سعر الإيجار اليومي',fmt(daily)+' ر.س'],['مدة الإيجار',days+' أيام'],['المجموع قبل الضريبة',fmt(base)+' ر.س'],vp?['ضريبة القيمة المضافة '+vp+'%',fmt(vat)+' ر.س']:['الضريبة','غير مضافة'],['إجمالي قيمة الإيجار'+(vp?' شامل الضريبة':''),fmt(total)+' ريال سعودي',1],['كتابةً',numToArabic(total)]])}
       <div class="pclauses-title" style="font-size:12px;font-weight:900;color:#1a2940;margin-bottom:4px">بنود العقد واتفاقيات الطرفين:</div>
       <ol style="margin-right:18px">
         <li style="font-size:11px;color:#1a1a1a;margin-bottom:4px;line-height:1.65;font-weight:600">تلتزم <b style="color:#e84118">${esc(CO.name)}</b> بتسليم السلة الكهربائية بحالة تشغيلية جيدة في الموعد المتفق عليه.</li>
@@ -988,7 +984,8 @@ function buildContractHTML(){
 /* ══════════════════════════════════════
    AGREEMENT LOGIC
 ══════════════════════════════════════ */
-const AG_DEFAULT_CLAUSES = ["يلتزم الطرف الأول بتنفيذ الأعمال الموصوفة في نطاق العمل بمستوى مهني معتاد وفي الموعد المتفق عليه، ما لم يقع تأخير لسبب يرجع إلى الطرف الثاني أو إلى ظرف خارج عن إرادته.", "يوفّر الطرف الثاني تصاريح الدخول والوصول الآمن إلى موقع العمل في الأوقات المتفق عليها، وأي تأخير أو تعطيل من جهته يمدّد مدة التنفيذ ويحق للطرف الأول المطالبة بما يترتب عليه من تكاليف.", "يُنفَّذ نطاق العمل المحدد في هذا العقد فقط، وأي أعمال إضافية أو تعديلات يطلبها الطرف الثاني تُنفَّذ بموافقة كتابية مسبقة وبسعر إضافي يُتفق عليه.", "يلتزم الطرف الثاني بسداد المستحقات في مواعيدها المتفق عليها، وعند التأخر يحق للطرف الأول إيقاف العمل دون أي مسؤولية عليه، وتُمدَّد مدة التنفيذ بقدر مدة الإيقاف.", "يُعدّ العمل مستلماً استلاماً نهائياً بعد مرور 48 ساعة من إخطار الطرف الثاني بإتمامه دون ملاحظات مكتوبة، أو بمجرد استخدامه له.", "لا يتحمل الطرف الأول أي مسؤولية عن الأضرار غير المباشرة أو التبعية أو خسارة الأرباح، ولا تتجاوز مسؤوليته في جميع الأحوال قيمة هذا العقد.", "لا يُعدّ أي طرف مخلاً بالتزاماته إذا كان الإخلال ناتجاً عن قوة قاهرة، كالظروف الجوية القاسية أو الأوامر الحكومية أو الحوادث الخارجة عن الإرادة، وتُمدَّد المدة بمقدارها.", "يحق للطرف الثاني إنهاء العقد بإخطار كتابي، ويلتزم بسداد قيمة ما أُنجز من الأعمال وما جُهّز من مواد وعمالة حتى تاريخ الإنهاء.", "يخضع هذا العقد لأنظمة المملكة العربية السعودية، وتُسوَّى أي خلافات بالطرق الودية أولاً، فإن تعذّر ذلك تُحال إلى الجهة القضائية المختصة في المدينة المنورة.", "يُعدّ هذا العقد ملزماً للطرفين من تاريخ التوقيع عليه، ولا يُعدَّل إلا باتفاق كتابي موقّع منهما."];
+const AG_DEFAULT_CLAUSES = ["يلتزم الطرف الأول بتنفيذ الأعمال الموصوفة في نطاق العمل بمستوى مهني معتاد وفي الموعد المتفق عليه، ما لم يقع تأخير لسبب يرجع إلى الطرف الثاني أو إلى ظرف خارج عن إرادته.", "يمكّن الطرف الثاني الطرف الأول من الدخول إلى موقع العمل في الأوقات المتفق عليها، وأي تعطيل من جهته يمدّد مدة التنفيذ ويحق للطرف الأول المطالبة بما يترتب عليه من تكاليف.", "يُنفَّذ نطاق العمل المحدد في هذا العقد فقط، وأي أعمال إضافية يطلبها الطرف الثاني تُنفَّذ بموافقة كتابية مسبقة وبسعر إضافي يُتفق عليه.", "يلتزم الطرف الثاني بسداد المستحقات في مواعيدها المتفق عليها، وعند التأخر يحق للطرف الأول إيقاف العمل دون مسؤولية عليه، وتُمدَّد مدة التنفيذ بقدر مدة الإيقاف.", "يُعدّ العمل مستلماً استلاماً نهائياً بعد مرور 48 ساعة من إخطار الطرف الثاني بإتمامه دون ملاحظات مكتوبة، أو بمجرد استخدامه له.", "لا يتحمل الطرف الأول أي مسؤولية عن الأضرار غير المباشرة أو خسارة الأرباح، ولا تتجاوز مسؤوليته في جميع الأحوال قيمة هذا العقد.", "لا يُعدّ أي طرف مخلاً بالتزاماته إذا كان الإخلال ناتجاً عن قوة قاهرة خارجة عن الإرادة، وتُمدَّد المدة بمقدارها.", "يحق للطرف الأول فسخ العقد عند إخلال الطرف الثاني بالتزاماته الجوهرية بعد إخطاره كتابياً وإمهاله سبعة أيام، ويحق للطرف الثاني الإنهاء بإخطار كتابي مع سداد قيمة ما أُنجز وما جُهّز من مواد وعمالة.", "يخضع هذا العقد لأنظمة المملكة العربية السعودية، وتُسوَّى الخلافات ودياً أولاً، وإلا أُحيلت إلى الجهة القضائية المختصة في المدينة المنورة."];
+const agClausesFor=ks=>[...new Set([...AG_DEFAULT_CLAUSES,...ks.filter(k=>SVC[k]).flatMap(k=>SVC[k].c)])];
 
 let agClauses = [...AG_DEFAULT_CLAUSES];
 
@@ -1080,7 +1077,7 @@ function buildAgreementHTML(){
   const p2phone=E('ag-p2phone');
   const p2addr=E('ag-p2addr');
   const subject=E('ag-subject')||'—';
-  const scope=qList('q-scope')||'<li>—</li>';
+  const scope=E('ag-scope').split(/\n+/).map(x=>x.trim()).filter(Boolean).map(x=>'<div>• '+x+'</div>').join('')||'—';
   const location=E('ag-location')||'—';
   const duration=E('ag-duration')||'—';
   const value=+E('ag-value')||0;
@@ -1104,7 +1101,7 @@ function buildAgreementHTML(){
     <div class="ptitle">عقد اتفاق</div>
     <div class="pb">
       <div class="pmeta">
-        <span class="num">رقم العقد: ${num}</span>
+        
         <span>تم بالتراضي بتاريخ: ${fmtDate(date)} — ${city}</span>
       </div>
 
@@ -1136,14 +1133,7 @@ function buildAgreementHTML(){
         <div class="ag-field-row"><span class="ag-lbl">نطاق العمل:</span><span class="ag-val">${scope}</span></div>
       </div>
 
-      <div class="pprice">
-        <div class="pprice-r">
-          <div class="lbl">قيمة العقد الإجمالية</div>
-          <div class="words" style="font-size:10px;color:#f59e0b;margin-top:3px;font-style:italic">${value>0?numToArabic(value):''}</div>
-          <div class="info" style="margin-top:3px">طريقة الدفع: ${payment}</div>
-        </div>
-        <div class="pprice-l"><div class="total">${fmt(value)}</div><div class="curr">ريال سعودي</div></div>
-      </div>
+      ${pt([['قيمة العقد الإجمالية',fmt(value)+' ريال سعودي',1],...(value>0?[['كتابةً',numToArabic(value)]]:[]),['طريقة الدفع',payment]])}
 
       <div class="ag-clauses-title">بنود العقد والاتفاقيات</div>
       ${clausesHTML}
@@ -1151,12 +1141,12 @@ function buildAgreementHTML(){
 
       <div class="ag-sig-grid">
         <div class="ag-sig-box">
-          <div class="ag-stamp-box">ختم</div>
+          
           <div class="ag-sig-title">الطرف الأول – مقدم الخدمة<br>${p1name}</div>
           <div class="ag-sig-line">التوقيع وتاريخه</div>
         </div>
         <div class="ag-sig-box">
-          <div class="ag-stamp-box">ختم</div>
+          
           <div class="ag-sig-title">الطرف الثاني – المستفيد<br>${p2name}</div>
           <div class="ag-sig-line">التوقيع وتاريخه</div>
         </div>
@@ -1778,21 +1768,22 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
 <script>
 const TY={quote:['عرض سعر','Q','q-client','q-tt'],contract:['عقد إيجار سلة','C','c-name','c-ttotal'],agreement:['عقد اتفاق','AG','ag-p2name','ag-value'],warranty:['شهادة ضمان','WR','wc-cname','wc-value']};
 const NUMF={quote:'q-num',contract:'c-num',agreement:'ag-num',warranty:'wc-num'},PHF={contract:'c-phone',agreement:'ag-p2phone',warranty:'wc-cphone'},DATF={quote:'q-date',contract:'c-date',agreement:'ag-date',warranty:'wc-issue'};
-let DB={arc:[],cl:{},lib:{ag:[],wc:[]},co:{}};try{Object.assign(DB,JSON.parse($('db').textContent))}catch(e){}DB.lib=DB.lib||{};DB.lib.ag=DB.lib.ag||[];DB.lib.wc=DB.lib.wc||[];
+let DB={arc:[],cl:{},lib:{ag:[],wc:[]},co:{}};try{Object.assign(DB,JSON.parse($('db').textContent))}catch(e){}try{const _s=localStorage.getItem('fdy_db');if(_s)Object.assign(DB,JSON.parse(_s))}catch(e){}DB.lib=DB.lib||{};DB.lib.ag=DB.lib.ag||[];DB.lib.wc=DB.lib.wc||[];
 let ARC=DB.arc,CL=DB.cl,CUR={},DEF={},FILT='all',DIRTY=0;
-const persist=()=>{DB.arc=ARC;DB.cl=CL;DB.co=CO;DIRTY=1;$('dirty').classList.add('on')};
+const persist=()=>{DB.arc=ARC;DB.cl=CL;DB.co=CO;try{localStorage.setItem('fdy_db',JSON.stringify(DB))}catch(e){}};
 function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),1800)}
 function snap(t){const f={};document.querySelectorAll('#'+t+' input,#'+t+' select,#'+t+' textarea').forEach(e=>{if(e.id)f[e.id]=e.value});return{f,ag:t=='agreement'?[...agClauses]:0,wc:t=='warranty'?[...wcTerms]:0,q:t=='quote'?JSON.parse(JSON.stringify(qItems)):0}}
-function rest(t,s){for(const k in s.f){const e=$(k);if(e)e.value=s.f[k]}if(s.ag)agClauses=[...s.ag];if(s.wc)wcTerms=[...s.wc];if(s.q)qItems=JSON.parse(JSON.stringify(s.q));agRender();wcRender();qRender();qCalc();cCalc();wcCalcEnd();agUpdateWords();chipsR('q');chipsR('ag')}
+function rest(t,s){for(const k in s.f){const e=$(k);if(e)e.value=s.f[k]}if(s.ag)agClauses=[...s.ag];if(s.wc)wcTerms=[...s.wc];if(s.q)qItems=JSON.parse(JSON.stringify(s.q));agRender();wcRender();qRender();qCalc();cCalc();wcCalcEnd();agUpdateWords();chipsR('q');chipsR('ag');growAll()}
 function amt(t){const e=$(TY[t][3]);return t=='quote'?e.textContent+' '+$('q-curr').value:(t=='contract'?e.textContent:(e.value?fmt(e.value)+' ريال':''))}
 function nextNum(t){const p=TY[t][1]+'-'+new Date().getFullYear()+'-';let m=0;ARC.forEach(a=>{if(a.t==t&&a.n&&a.n.startsWith(p))m=Math.max(m,parseInt(a.n.slice(p.length))||0)});return p+String(m+1).padStart(3,'0')}
 function saveDoc(t,silent,ex){const nm=$(TY[t][2]).value.trim();if(silent&&!nm&&!ex)return;let a=ARC.find(x=>x.id==CUR[t]);if(!a){a={id:Date.now(),t};ARC.unshift(a);CUR[t]=a.id}
 a.n=$(NUMF[t]).value;a.c=nm;a.a=amt(t);a.d=$(DATF[t]).value;a.u=Date.now();a.s=snap(t);if(ex)a.x=1;if(nm)saveClient(t,nm);persist();fillDL();if(!silent)toast('تم الحفظ ✓')}
 const fillDL=()=>$('dl-clients').innerHTML=Object.keys(CL).map(n=>`<option value="${esc(n)}">`).join('');
-const CMAP={contract:{'c-id':'id','c-phone':'phone','c-loc':'loc'},agreement:{'ag-p2cr':'cr','ag-p2tax':'tax','ag-p2rep':'rep','ag-p2phone':'phone','ag-p2addr':'addr'},warranty:{'wc-cphone':'phone','wc-cloc':'loc'}};
-function saveClient(t,nm){const r=CL[nm]&&typeof CL[nm]=='object'?CL[nm]:{},m=CMAP[t]||{};for(const id in m){const v=$(id).value.trim();if(v)r[m[id]]=v}CL[nm]=r}
-['input','change'].forEach(ev=>document.addEventListener(ev,e=>{const t={'c-name':'contract','ag-p2name':'agreement','wc-cname':'warranty'}[e.target.id],r=CL[e.target.value];if(!t||!r||typeof r!='object')return;const m=CMAP[t];for(const id in m)if(r[m[id]])$(id).value=r[m[id]]}));
-function itemHTML(a,full){return `<div class="ai" onclick="openDoc(${a.id})"><div class="r"><div class="t">${esc(a.c)||'بدون اسم'}</div><span class="bd${a.x?' ok':''}">${a.x?'صادر':'مسودة'}</span></div><div class="m">${TY[a.t][0]} · ${esc(a.n)} · ${fmtDate(a.d)}${a.a?' · '+esc(a.a):''}</div>${full?`<div class="acts"><button onclick="event.stopPropagation();dupDoc(${a.id})">نسخ</button><button class="d" onclick="event.stopPropagation();delDoc(${a.id})">حذف</button></div>`:''}</div>`}
+const CMAP={quote:{'q-phone':'phone','q-addr':'addr','q-cr':'cr','q-tax':'tax','q-rep':'rep'},contract:{'c-id':'id','c-phone':'phone','c-loc':'addr'},agreement:{'ag-p2cr':'cr','ag-p2tax':'tax','ag-p2rep':'rep','ag-p2phone':'phone','ag-p2addr':'addr','ag-location':'addr'},warranty:{'wc-cphone':'phone','wc-cloc':'addr'}};
+function saveClient(t,nm){const r=CL[nm]&&typeof CL[nm]=='object'?CL[nm]:{},m=CMAP[t]||{};for(const id in m){const v=$(id).value.trim();if(v)r[m[id]]=v}if(t=='quote'){r.svc=$('q-svc').value;r.scope=$('q-scope').value;r.subj=$('q-wtype').value;r.val=Math.round(qTotals().total*100)/100}CL[nm]=r}
+['input','change'].forEach(ev=>document.addEventListener(ev,e=>{const t={'q-client':'quote','c-name':'contract','ag-p2name':'agreement','wc-cname':'warranty'}[e.target.id],r=CL[e.target.value];if(!t||!r||typeof r!='object')return;const m=CMAP[t];for(const id in m)if(r[m[id]])$(id).value=r[m[id]];
+if(t=='agreement'&&r.svc){$('ag-svc').value=r.svc;$('ag-scope').value=r.scope||'';$('ag-subject').value=r.subj?'أعمال '+r.subj:'';if(r.val)$('ag-value').value=r.val;agClauses=agClausesFor(r.svc.split(','));agRender();chipsR('ag');growAll()}}));
+function itemHTML(a,full){return `<div class="ai" onclick="openDoc(${a.id})"><div class="r"><div class="t">${esc(a.c)||'بدون اسم'}</div><span class="bd${a.x?' ok':''}">${a.x?'صادر':'مسودة'}</span></div><div class="m">${TY[a.t][0]} · ${fmtDate(a.d)}${a.a?' · '+esc(a.a):''}</div>${full?`<div class="acts"><button onclick="event.stopPropagation();dupDoc(${a.id})">نسخ</button><button class="d" onclick="event.stopPropagation();delDoc(${a.id})">حذف</button></div>`:''}</div>`}
 function arRender(){const q=$('ar-q').value.trim(),F=[['all','الكل'],...Object.keys(TY).map(k=>[k,TY[k][0]])];$('ar-chips').innerHTML=F.map(([k,l])=>`<button class="chip${FILT==k?' on':''}" onclick="FILT='${k}';arRender()">${l}</button>`).join('');
 const L=ARC.filter(a=>(FILT=='all'||a.t==FILT)&&(!q||((a.c||'')+(a.n||'')).includes(q)));$('ar-list').innerHTML=L.length?L.map(a=>itemHTML(a,1)).join(''):'<div style="text-align:center;color:#7a8fa6;padding:40px 0">لا توجد مستندات</div>'}
 function openDoc(id){const a=ARC.find(x=>x.id==id);if(!a)return;goTo(a.t,1);CUR[a.t]=a.id;rest(a.t,a.s)}
@@ -1810,12 +1801,15 @@ function bkImp(i){const f=i.files[0];if(!f)return;const r=new FileReader();r.onl
 const _g=goTo,_h=goHome;screenNames.archive='الأرشيف';screenNames.settings='الإعدادات';
 const nav=id=>document.querySelectorAll('.bnav button').forEach(b=>b.classList.toggle('on',b.dataset.n==(id=='archive'||id=='settings'?id:'home')));
 function leave(){const c=document.querySelector('.screen.active');if(c&&TY[c.id])saveDoc(c.id,1)}
-window.goTo=function(id,keep){leave();_g(id);nav(id);if(TY[id]&&!keep){CUR[id]=null;rest(id,DEF[id]);$(NUMF[id]).value=nextNum(id);$(DATF[id]).value=today;if(id=='agreement')fillCO()}if(id=='archive')arRender();if(id=='settings')stFill()};
+window.goTo=function(id,keep){leave();_g(id);nav(id);if(TY[id]&&!keep){CUR[id]=null;rest(id,DEF[id]);$(NUMF[id]).value=nextNum(id);$(DATF[id]).value=today;if(id=='agreement')fillCO()}if(id=='archive')arRender();if(id=='settings')stFill();growAll()};
 window.goHome=function(){leave();_h();nav('home');homeRecent()};
 window.agLoad=window.wcLoad=()=>{};window.agSave=()=>saveDoc('agreement');window.wcSave=()=>saveDoc('warranty');
 window.wcCalcEnd=function(){const s=$('wc-start').value,e=$('wc-end');if(!s){e.value='';return}const m={'1 شهر':1,'3 أشهر':3,'6 أشهر':6,'سنة واحدة':12,'سنتان':24,'3 سنوات':36}[$('wc-dur').value]||12,[y,mo,d]=s.split('-').map(Number),last=new Date(Date.UTC(y,mo+m,0)).getUTCDate(),t=new Date(Date.UTC(y,mo-1+m,Math.min(d,last)));t.setUTCDate(t.getUTCDate()-1);e.value=fmtDate(t.toISOString().slice(0,10))};
 /* print / share */
-function fit(a){a.style.cssText='display:block!important;position:fixed;left:-9999px;top:0;width:210mm';a.querySelectorAll('.P,.wc-cert').forEach(p=>{p.style.overflow='hidden';const b=p.querySelector('.pb,.wc-inner');if(!b)return;let z=1;while(p.scrollHeight>p.clientHeight+2&&z>.62){z-=.04;b.style.zoom=z}});a.style.cssText=''}
+function paginate(a){a.style.cssText='display:block!important;position:fixed;left:-9999px;top:0;width:210mm';
+[...a.querySelectorAll('.P')].forEach(P=>{let cur=P;for(let g=0;g<10;g++){const pb=cur.querySelector('.pb'),ft=cur.querySelector('.pfoot');if(!pb)break;
+const lim=cur.getBoundingClientRect().top+cur.clientHeight-(ft?ft.offsetHeight:0)-16,kids=[...pb.children],k=kids.findIndex(c=>c.getBoundingClientRect().bottom>lim);if(k<1)break;
+const N=cur.cloneNode(true);[...N.querySelector('.pb').children].slice(0,k).forEach(c=>c.remove());kids.slice(k).forEach(c=>c.remove());cur.after(N);cur=N}});a.style.cssText=''}
 
 function chipsR(p){const cur=($(p+'-svc').value||'').split(',').filter(Boolean);$(p+'-chips').innerHTML=Object.keys(SVC).map(k=>`<button type="button" class="chip${cur.includes(k)?' on':''}" onclick="svcT('${p}','${k}')">${SVC[k].n}</button>`).join('')}
 function svcT(p,k){const inp=$(p+'-svc'),a=(inp.value||'').split(',').filter(Boolean),on=!a.includes(k),b=on?[...a,k]:a.filter(x=>x!=k),S=SVC[k];inp.value=b.join(',');chipsR(p);
@@ -1823,7 +1817,7 @@ const lines=(id,arr)=>{const c=$(id).value.split('\n').map(x=>x.trim()).filter(B
 const nm=b.map(x=>SVC[x].n).join(' و');
 if(p=='q'){lines('q-scope',S.s);lines('q-method',S.m);lines('q-feat',S.f);$('q-wtype').value=nm;
 if(on){if(qItems.length==1&&!qItems[0].d&&!+qItems[0].p)qItems[0].d=S.i;else qItems.push({d:S.i,q:1,p:0})}else{const j=qItems.findIndex(x=>x.d==S.i);if(j>-1&&qItems.length>1)qItems.splice(j,1)}qRender()}
-else{lines('ag-scope',S.s);agClauses=on?[...agClauses,...S.c.filter(x=>!agClauses.includes(x))]:agClauses.filter(x=>!S.c.includes(x));agRender();$('ag-subject').value=nm?'أعمال '+nm:''}}
+else{lines('ag-scope',S.s);agClauses=on?[...agClauses,...S.c.filter(x=>!agClauses.includes(x))]:agClauses.filter(x=>!S.c.includes(x));agRender();$('ag-subject').value=nm?'أعمال '+nm:''}growAll()}
 const rows=(a,k,dl)=>a.map((c,i)=>`<div class="clause-row"><div class="clause-num">${i+1}</div><textarea class="clause-row-text" oninput="${k=='ag'?'agClauses':'wcTerms'}[${i}]=this.value" style="flex:1;min-height:50px;font-size:13px;padding:6px 10px;background:transparent;border:none;color:#fff;outline:none;resize:vertical;font-family:Tajawal,sans-serif">${esc(c)}</textarea><button class="clause-del" style="color:#f59e0b" onclick="libSave('${k}',${i})">⭐</button><button class="clause-del" onclick="${dl}(${i})">×</button></div>`).join('');
 window.agRender=()=>$('ag-clauses-list').innerHTML=rows(agClauses,'ag','agDelClause');window.wcRender=()=>$('wc-terms-list').innerHTML=rows(wcTerms,'wc','wcDelTerm');
 let _L=[];
@@ -1834,19 +1828,18 @@ const libClose=()=>$('sheet').classList.remove('on');
 function libAdd(k,i){(k=='ag'?agClauses:wcTerms).push(_L[i]);(k=='ag'?agRender:wcRender)();toast('أُضيف البند ✓')}
 function libSave(k,i){const c=(k=='ag'?agClauses:wcTerms)[i];if(c&&!DB.lib[k].includes(c)){DB.lib[k].push(c);persist();toast('حُفظ في مكتبتك ⭐')}}
 function libDel(k,i){DB.lib[k].splice(i,1);persist();libOpen(k)}
-/* voice */
-const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-function micWrap(){if(!SR)return;document.querySelectorAll('input:not([type]),input[type=text],textarea').forEach(e=>{if(e.dataset.mic||e.readOnly||e.id=='ar-q')return;e.dataset.mic=1;const w=document.createElement('span');w.className='mw';e.parentNode.insertBefore(w,e);w.appendChild(e);const b=document.createElement('button');b.type='button';b.className='mic';b.textContent='🎤';b.onclick=ev=>{ev.preventDefault();dict(e,b)};w.appendChild(b)})}
-function dict(e,b){const r=new SR();r.lang='ar-SA';r.onresult=ev=>{const t=ev.results[0][0].transcript;e.value+=(e.value&&!/\s$/.test(e.value)?' ':'')+t;e.dispatchEvent(new Event('input',{bubbles:true}))};r.onend=r.onerror=()=>b.classList.remove('rec');b.classList.add('rec');r.start()}
-new MutationObserver(micWrap).observe(document.body,{childList:true,subtree:true});
+const grow=e=>{e.style.height='auto';e.style.height=(e.scrollHeight+2)+'px'},growAll=()=>document.querySelectorAll('textarea').forEach(grow);
+document.addEventListener('input',e=>{if(e.target.tagName=='TEXTAREA')grow(e.target)});document.addEventListener('focusin',e=>{if(e.target.tagName=='TEXTAREA')grow(e.target)});
+new MutationObserver(growAll).observe(document.body,{childList:true,subtree:true});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)leave()});
 /* PDF + share */
 const dlBlob=(b,n)=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=n;a.click()};
-async function pdfDoc(t,share){saveDoc(t,1,1);toast('جارٍ إنشاء PDF…');const a=$('print-area');a.innerHTML=builders[t]();fit(a);
-try{await document.fonts.ready;const pdf=new window.jspdf.jsPDF('p','mm','a4'),pgs=[...a.querySelectorAll('.P,.wc-cert')];
+async function pdfDoc(t,share){saveDoc(t,1,1);toast('جارٍ إنشاء PDF…');const a=$('print-area');a.innerHTML=builders[t]();await Promise.all([...a.querySelectorAll('img')].map(i=>i.decode?i.decode().catch(()=>{}):0));await document.fonts.ready;paginate(a);
+try{const pdf=new window.jspdf.jsPDF('p','mm','a4'),pgs=[...a.querySelectorAll('.P,.wc-cert')];
 for(let i=0;i<pgs.length;i++){const c=await html2canvas(pgs[i],{scale:2,useCORS:true,backgroundColor:'#fff',windowWidth:794,onclone:d=>{d.getElementById('print-area').style.cssText='display:block;position:absolute;left:0;top:0;width:210mm'}});if(i)pdf.addPage();pdf.addImage(c.toDataURL('image/jpeg',.92),'JPEG',0,0,210,297)}
-const nm=(TY[t][0]+'-'+$(NUMF[t]).value+'-'+($(TY[t][2]).value||'')).replace(/[\\\/:*?"<>|\s]+/g,'_')+'.pdf',blob=pdf.output('blob');
+const nm=(TY[t][0]+'-'+($(TY[t][2]).value||'')+'-'+($(DATF[t]).value||'')).replace(/[\\\/:*?"<>|\s]+/g,'_')+'.pdf',blob=pdf.output('blob');
 if(!share){dlBlob(blob,nm);toast('تم إنشاء PDF ✓');return}
-const file=new File([blob],nm,{type:'application/pdf'}),msg=`السادة / ${$(TY[t][2]).value}\n${TY[t][0]} رقم ${$(NUMF[t]).value}\n— ${CO.name}\n${CO.phone}`;
+const file=new File([blob],nm,{type:'application/pdf'}),msg=`السادة / ${$(TY[t][2]).value}\n${TY[t][0]}\n— ${CO.name}\n${CO.phone}`;
 if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],text:msg});return}catch(e){if(e.name=='AbortError')return}}
 dlBlob(blob,nm);const ph=PHF[t]?$(PHF[t]).value.replace(/\D/g,''):'';window.open('https://wa.me/'+(ph?(ph.startsWith('966')?ph:'966'+ph.replace(/^0/,'')):'')+'?text='+encodeURIComponent(msg+'\n(أرفق ملف PDF الذي تم تنزيله)'),'_blank')}
 catch(e){toast('تعذّر إنشاء PDF')}}
@@ -1856,7 +1849,7 @@ DB.arc=ARC;DB.cl=CL;DB.co=CO;const j=JSON.stringify(DB).replace(/</g,'\\u003c');
 addEventListener('beforeunload',e=>{if(DIRTY){e.preventDefault();e.returnValue=''}});
 /* init */
 document.querySelectorAll('input[type=number]').forEach(e=>e.inputMode='decimal');
-chipsR('q');chipsR('ag');micWrap();
+chipsR('q');chipsR('ag');
 applyCO();fillCO();fillDL();
 for(const t in TY){$(NUMF[t]).value=nextNum(t);$(DATF[t]).value=today;DEF[t]=snap(t)}
 nav('home');homeRecent();if(ARC.length)$('dirty').classList.remove('on');
